@@ -67,6 +67,18 @@ where
     middleware: PhantomData<MW>,
 }
 
+#[cfg(feature = "partial_eq")]
+impl<K, S, C, MW> PartialEq for RateLimiter<K, S, C, MW>
+where
+    S: StateStore<Key = K>,
+    C: clock::Clock,
+    MW: RateLimitingMiddleware<C::Instant>,
+{
+    fn eq(&self, other: &Self) -> bool {
+        (self.gcra == other.gcra) && (self.start == other.start)
+    }
+}
+
 impl<K, S, C, MW> RateLimiter<K, S, C, MW>
 where
     S: StateStore<Key = K>,

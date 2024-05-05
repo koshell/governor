@@ -28,12 +28,13 @@ bench = false
 [features]
 default = ["std", "dashmap", "jitter", "quanta"]
 quanta = ["dep:quanta"]
+partial_eq = []
 std = [
-   "no-std-compat/std",
-   "nonzero_ext/std",
+   "dep:parking_lot",
    "futures-timer",
    "futures",
-   "dep:parking_lot",
+   "no-std-compat/std",
+   "nonzero_ext/std",
 ]
 jitter = ["rand"]
 no_std = ["no-std-compat/compat_hash"]
